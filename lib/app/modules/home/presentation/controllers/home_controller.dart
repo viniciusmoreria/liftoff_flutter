@@ -3,16 +3,25 @@ import 'package:liftoff/app/core/utils/logger.dart';
 import 'package:liftoff/app/modules/home/domain/adapters/repository_adapter.dart';
 import 'package:liftoff/app/modules/home/domain/entity/launch_model.dart';
 
-class HomeController extends SuperController<List<LaunchModel>> {
+class HomeController extends GetxController {
   HomeController({required this.homeRepository});
 
   final IHomeRepository homeRepository;
 
+  RxList<LaunchModel> launches = <LaunchModel>[].obs;
+  Rx<LaunchModel> nextLaunch = LaunchModel().obs;
+
   @override
   void onInit() {
-    super.onInit();
+    homeRepository.getNextLaunch().then((launch) {
+      nextLaunch.value = launch;
+    });
 
-    append(() => homeRepository.getLaunches);
+    homeRepository.getUpcomingLaunches().then((allLaunches) {
+      launches.value = allLaunches;
+    });
+
+    super.onInit();
   }
 
   @override
@@ -26,37 +35,5 @@ class HomeController extends SuperController<List<LaunchModel>> {
   void onClose() {
     Logger.d('onClose called');
     super.onClose();
-  }
-
-  @override
-  Future<bool> didPushRoute(String route) {
-    Logger.d('the route $route will be open');
-    return super.didPushRoute(route);
-  }
-
-  @override
-  Future<bool> didPopRoute() {
-    Logger.d('the current route will be closed');
-    return super.didPopRoute();
-  }
-
-  @override
-  void onDetached() {
-    Logger.d('onDetached called');
-  }
-
-  @override
-  void onInactive() {
-    Logger.d('onInactive called');
-  }
-
-  @override
-  void onPaused() {
-    Logger.d('onPaused called');
-  }
-
-  @override
-  void onResumed() {
-    Logger.d('onResumed called');
   }
 }

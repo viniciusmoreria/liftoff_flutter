@@ -8,19 +8,44 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          controller.obx(
-            (data) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Obx(
+              () => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${data?[0].name}'),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: Text('Next launch:'),
+                  ),
+                  Text(controller.nextLaunch.value.name ?? 'Loading'),
                 ],
               ),
             ),
-          ),
-        ],
+            const Padding(
+              padding: EdgeInsets.only(top: 24, bottom: 12),
+              child: Text(
+                'Upcomings launches:',
+              ),
+            ),
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.launches.length,
+                  itemBuilder: (context, index) {
+                    final item = controller.launches[index];
+
+                    return Text('${item.name}');
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

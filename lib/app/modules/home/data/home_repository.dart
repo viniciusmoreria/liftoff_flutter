@@ -8,8 +8,8 @@ class HomeRepository implements IHomeRepository {
   final IHomeProvider provider;
 
   @override
-  Future<List<LaunchModel>> getLaunches() async {
-    final response = await provider.getLaunches('/launches');
+  Future<List<LaunchModel>> getUpcomingLaunches() async {
+    final response = await provider.getUpcomingLaunches('/launches/upcoming');
     if (response.hasError) {
       return Future.error(response.statusText!);
     } else {
@@ -17,7 +17,19 @@ class HomeRepository implements IHomeRepository {
       List<LaunchModel> launchesList =
           jsonResponse.map((launch) => LaunchModel.fromJson(launch)).toList();
 
-      return launchesList;
+      return launchesList..removeAt(0);
+    }
+  }
+
+  @override
+  Future<LaunchModel> getNextLaunch() async {
+    final response = await provider.getNextLaunch('/launches/next');
+    if (response.hasError) {
+      return Future.error(response.statusText!);
+    } else {
+      LaunchModel nextLaunch = LaunchModel.fromJson(response.body!);
+
+      return nextLaunch;
     }
   }
 }

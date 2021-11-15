@@ -1,32 +1,32 @@
 // ignore_for_file: non_constant_identifier_names
 
 class LaunchModel {
-  late String? id;
-  late int? flight_number;
-  late String? name;
-  late String? date_utc;
-  late int? date_unix;
-  late String? date_local;
-  late String? date_precision;
-  late String? static_fire_date_utc;
-  late int? static_fire_date_unix;
-  late bool? tdb;
-  late bool? net;
-  late int? window;
-  late String? rocket;
-  late bool? success;
-  late bool? upcoming;
-  late String? details;
-  late Fairings? fairings;
-  late List<Failures>? failures;
-  late List<String>? crew;
-  late List<String>? ships;
-  late List<String>? capsules;
-  late List<String>? payloads;
-  late String launchpad;
-  late bool auto_update;
-  late List<Cores>? cores;
-  late Links? links;
+  String? id;
+  int? flight_number;
+  String? name;
+  String? date_utc;
+  int? date_unix;
+  String? date_local;
+  String? date_precision;
+  String? static_fire_date_utc;
+  int? static_fire_date_unix;
+  bool? tdb;
+  bool? net;
+  int? window;
+  String? rocket;
+  bool? success;
+  bool? upcoming;
+  String? details;
+  Fairings? fairings;
+  List<Failures>? failures;
+  List<String>? crew;
+  List<String>? ships;
+  List<String>? capsules;
+  List<String>? payloads;
+  String? launchpad;
+  bool? auto_update;
+  List<Cores>? cores;
+  Links? links;
 
   LaunchModel({
     id,

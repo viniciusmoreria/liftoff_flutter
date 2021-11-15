@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.HOME,
-      defaultTransition: Transition.fade,
+      defaultTransition: Transition.cupertino,
       getPages: AppPages.pages,
     );
   }
