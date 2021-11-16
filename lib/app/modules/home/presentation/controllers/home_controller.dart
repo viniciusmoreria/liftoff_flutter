@@ -8,18 +8,13 @@ class HomeController extends GetxController {
 
   final IHomeRepository homeRepository;
 
-  RxList<LaunchModel> launches = <LaunchModel>[].obs;
+  RxList<LaunchModel> upcomingLaunches = <LaunchModel>[].obs;
   Rx<LaunchModel> nextLaunch = LaunchModel().obs;
 
   @override
-  void onInit() {
-    homeRepository.getNextLaunch().then((launch) {
-      nextLaunch.value = launch;
-    });
-
-    homeRepository.getUpcomingLaunches().then((allLaunches) {
-      launches.value = allLaunches;
-    });
+  void onInit() async {
+    nextLaunch.value = await homeRepository.getNextLaunch();
+    upcomingLaunches.value = await homeRepository.getUpcomingLaunches();
 
     super.onInit();
   }

@@ -22,7 +22,7 @@ class HomeView extends GetView<HomeController> {
                     padding: EdgeInsets.only(bottom: 12),
                     child: Text('Next launch:'),
                   ),
-                  Text(controller.nextLaunch.value.name ?? 'Loading'),
+                  Text(controller.nextLaunch.value.name ?? ''),
                 ],
               ),
             ),
@@ -35,9 +35,9 @@ class HomeView extends GetView<HomeController> {
             Expanded(
               child: Obx(
                 () => ListView.builder(
-                  itemCount: controller.launches.length,
+                  itemCount: controller.upcomingLaunches.length,
                   itemBuilder: (context, index) {
-                    final item = controller.launches[index];
+                    final item = controller.upcomingLaunches[index];
 
                     return Text('${item.name}');
                   },
